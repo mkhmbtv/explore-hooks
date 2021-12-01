@@ -10,7 +10,7 @@ function ProductDetails({ product, visible }) {
             <p>Please select a product to view its details.</p>
         </div>
     )
-
+    console.log('rendering ProductDetails')
     return (
         <div className="product-details">
             <p className="product-info">{product.name}</p>

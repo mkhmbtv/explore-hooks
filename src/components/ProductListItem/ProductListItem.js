@@ -1,6 +1,7 @@
 import React from 'react'
 
 function ProductListItem({ product, isSelected, onClick }) {
+    console.log('rendering ProductListItem')
     return (
         <div className={`product-list-item ${isSelected ? ' selected' : ''}`}>
             <img className="product-list-item-photo"
