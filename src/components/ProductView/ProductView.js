@@ -4,9 +4,8 @@ import ProductDetails from "../ProductDetails";
 import './ProductView.css'
 
 function ProductView({ products }) {
-
-    // TODO: Replace with state variable
     const [sideOpen, setSideOpen] = useState(true);
+    const [selectedProduct, setSelectedProduct] = useState(null);
 
     return (
         <div className="product-view">
@@ -17,7 +16,8 @@ function ProductView({ products }) {
                         <ProductListItem
                             key={item.id}
                             product={item}
-                            onClick={() => console.log('SELECT PRODUCT', item)}
+                            isSelected={selectedProduct ? item.id === selectedProduct.id : false}
+                            onClick={() => setSelectedProduct(item)}
                         />
                     )}
                 </div>
@@ -29,7 +29,7 @@ function ProductView({ products }) {
                         {sideOpen ? '>' : '<'}
                     </div>
                 </div>
-                <ProductDetails visible={sideOpen} />
+                <ProductDetails product={selectedProduct} visible={sideOpen} />
             </div>
         </div>
     );
