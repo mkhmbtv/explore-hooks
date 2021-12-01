@@ -4,8 +4,20 @@ import ProductDetails from "../ProductDetails";
 import './ProductView.css'
 
 function ProductView({ products }) {
-    const [sideOpen, setSideOpen] = useState(true);
-    const [selectedProduct, setSelectedProduct] = useState(null);
+    const sideOpenStored = localStorage.getItem('sideOpen')
+        ? JSON.parse(localStorage.getItem('sideOpen'))
+        : true;
+    const selectedProductStored = localStorage.getItem('selectedProduct')
+        ? JSON.parse(localStorage.getItem('selectedProduct'))
+        : null
+
+    const [sideOpen, setSideOpen] = useState(sideOpenStored);
+    const [selectedProduct, setSelectedProduct] = useState(selectedProductStored);
+
+    useEffect(() => {
+        localStorage.setItem('sideOpen', sideOpen);
+        localStorage.setItem('selectedProduct', JSON.stringify(selectedProduct));
+    }, [sideOpen, selectedProduct]);
 
     useEffect(() => {
         console.log('selectedProduct CHANGED TO', selectedProduct);
@@ -16,7 +28,7 @@ function ProductView({ products }) {
         console.log('sideOpen CHANGED TO', sideOpen);
         if (!sideOpen) setSelectedProduct(null);
     }, [sideOpen]);
-
+    
     console.log('rendering ProductView')
     return (
         <div className="product-view">
